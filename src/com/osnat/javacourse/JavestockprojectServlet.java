@@ -9,6 +9,6 @@ public class JavestockprojectServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/plain");
 		resp.getWriter().println("Hello, osnat");
-		//test
+		//testing
 	}
 }
