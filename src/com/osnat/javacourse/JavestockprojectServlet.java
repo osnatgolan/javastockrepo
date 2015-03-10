@@ -8,7 +8,7 @@ public class JavestockprojectServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
-		resp.getWriter().println("Hello, Osnat");
+		resp.getWriter().println("Hello, World");
 		//testing3
 	}
 }
