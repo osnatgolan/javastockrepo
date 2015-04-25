@@ -12,7 +12,23 @@ public class Stock {
 	private float bid;
 	private Date date;
 	
+	private int recomendation;
+	private int stockQuantity;
+	private final static int BUY= 0;
+	private final static int SELL= 1;
+	private final static int REMOVE= 2;
+	private final static int HOLD= 3;
+	
+	
 	DateFormat df= new SimpleDateFormat("dd/MM/yyyy");
+	
+	public Stock(String symbol, float ask, float bid, Date date) {
+				this.symbol = symbol;
+				this.bid = bid;
+				this.ask = ask;
+				this.date = date;
+				
+			}
 	
 	public String getSymbol() {
 		return symbol;

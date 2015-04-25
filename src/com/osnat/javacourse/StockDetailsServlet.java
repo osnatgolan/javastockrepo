@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.osnat.javacourse.Stock;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class StockDetailsServlet extends HttpServlet {
@@ -20,25 +21,18 @@ public class StockDetailsServlet extends HttpServlet {
 			c.set(2014, 10, 15);
 				
 			
-			Stock stock1= new Stock();
-			Stock stock2= new Stock();
-			Stock stock3= new Stock();
+			Date date1 = c.getTime();
+			Stock stock1= new Stock("PIH",(float) 13.1,(float) 12.4,date1 );
+			
+			Date date2 = c.getTime();
+			Stock stock2= new Stock("AAL",(float) 5.78, (float) 5.5, date2);
+			
+			Date date3 = c.getTime();
+			Stock stock3= new Stock("CAAS",(float) 32.2, (float) 31.5, date3);
 			
 			
-			stock1.setSymbol("PIH");
-			stock1.setAsk((float) 13.1);
-			stock1.setBid((float) 12.4);
-			stock1.setDate(c.getTime());
-			
-			stock2.setSymbol("AAL");
-			stock2.setAsk((float) 5.78);
-			stock2.setBid((float) 5.5);
-			stock2.setDate(c.getTime());
-			
-			stock3.setSymbol("CAAS");
-			stock3.setAsk((float) 32.2);
-			stock3.setBid((float) 31.5);
-			stock3.setDate(c.getTime());
+
+	
 		
 	
 			resp.getWriter().println("The stocks details are: <br>");
