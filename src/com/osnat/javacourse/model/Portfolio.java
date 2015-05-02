@@ -1,7 +1,7 @@
 package com.osnat.javacourse.model;
 
-import com.osnat.javacourse.Stock;
 import java.util.Date;
+import com.osnat.*;
 
 public class Portfolio {
 	
@@ -9,18 +9,73 @@ public class Portfolio {
 	private final static int MAX_PORTFOLIO_SIZE=5;
 	private Stock[] stocks;
     int portfolioSize=0;
-	
+    
+    
+    //getters and Setters
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public Stock[] getStocks() {
+		return stocks;
+	}
+
+
+	public void setStocks(Stock[] stocks) {
+		this.stocks = stocks;
+	}
+
+
+	public int getPortfolioSize() {
+		return portfolioSize;
+	}
+
+
+	public void setPortfolioSize(int portfolioSize) {
+		this.portfolioSize = portfolioSize;
+	}
+
+
+	//Constructor
 	public Portfolio(String title){
-		stocks= new Stock[MAX_PORTFOLIO_SIZE];
+		
+		this.stocks= new Stock[MAX_PORTFOLIO_SIZE];
 		this.title= title;
+		this.portfolioSize=0;
+		
+	}
+	
+	
+	//Copy constructor
+	public Portfolio(Portfolio portfolio){
+		
+		setTitle(portfolio.getTitle());
+		setPortfolioSize(portfolio.getPortfolioSize());
+		
+		for(int i=0; i<this.portfolioSize; i++){
+			stocks[i]= new Stock(portfolio.getStock()[i]);
+			
+		}
+		
 	}
 	
 	
 	
 	public void addStock(Stock stk){
 			
+		if(this.portfolioSize<MAX_PORTFOLIO_SIZE)
+		{
 			this.stocks[this.portfolioSize]=stk;
 			this.portfolioSize++;	
+		}
+		else
+			System.out.println("Portfolio is full!");
 	}
 	
 
@@ -39,5 +94,22 @@ public class Portfolio {
 		
 		return str;
 	}
+	
+	public void removeStock(Stock stock)
+		{
+			for(int i=0; i < portfolioSize; i++)
+			{
+				if(this.stocks[i].getSymbol().equals(stock.getSymbol()))
+				{
+					if(i != portfolioSize-1 && portfolioSize > 1)
+						for(int j = i; j < portfolioSize-1; j++)
+						{
+							this.stocks[j] = new Stock(this.stocks[j+1]);
+						}
+				}
+			}
+			this.portfolioSize--;
+		}
 
+	
 }

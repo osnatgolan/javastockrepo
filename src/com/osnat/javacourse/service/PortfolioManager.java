@@ -8,8 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.osnat.javacourse.Stock;
 import com.osnat.javacourse.model.Portfolio;
+import com.osnat.javacourse.model.Stock;
+import com.osnat.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,7 +19,7 @@ public class PortfolioManager {
 	
 	public Portfolio getPortfolio(){
 		
-		Portfolio myportfolio= new Portfolio("My Portfolio:"+ "<br/>");
+		Portfolio myportfolio= new Portfolio("Portfolio 01");
 		
 		Calendar c= Calendar.getInstance();
 		c.set(2014, 10, 15);

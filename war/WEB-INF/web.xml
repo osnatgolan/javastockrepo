@@ -10,34 +10,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
-	<servlet>
-		<servlet-name>Javestockproject</servlet-name>
-		<servlet-class>com.osnat.javacourse.JavestockprojectServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Javestockproject</servlet-name>
-		<url-pattern>/javestockproject</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Exercise02</servlet-name>
-		<servlet-class>com.osnat.javacourse.Exercise02</servlet-class>
-	</servlet>	
-	
-		<servlet-mapping>
-		<servlet-name>Exercise02</servlet-name>
-		<url-pattern>/exercise02</url-pattern>
-	</servlet-mapping>
-	
-		<servlet>
-		<servlet-name>StockDetailsServlet</servlet-name>
-		<servlet-class>com.osnat.javacourse.StockDetailsServlet</servlet-class>
-	</servlet>	
-	
-		<servlet-mapping>
-		<servlet-name>StockDetailsServlet</servlet-name>
-		<url-pattern>/StockDetailsServlet</url-pattern>
-	</servlet-mapping>
+
 	
 	
 			<servlet>
