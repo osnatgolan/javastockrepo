@@ -65,20 +65,20 @@ public class Stock {
 	
 	//Constructor
 	public Stock(String symbol, float ask, float bid, Date date) {
-				setSymbol(symbol);
-				setBid( bid);
-				setAsk(ask);
-				setDate(date);
+				this.setSymbol(symbol);
+				this.setBid( bid);
+				this.setAsk(ask);
+				this.setDate(date);
 				
 			}
 	
 	//Copy constructor
 	public Stock(Stock stock){
 		
-		setSymbol(stock.getSymbol());
-		setBid(stock. getBid());
-		setAsk(stock.getAsk());
-		setDate(stock.getDate());
+		this.setSymbol(stock.getSymbol());
+		this.setBid(stock. getBid());
+		this.setAsk(stock.getAsk());
+		this.setDate(stock.getDate());
 	}
 	
 	//printing stocks

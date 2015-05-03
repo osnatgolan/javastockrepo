@@ -17,6 +17,10 @@ import java.util.Date;
 
 public class PortfolioManager {
 	
+	public void portfolioManager(){
+		
+	}
+	
 	public Portfolio getPortfolio(){
 		
 		Portfolio myportfolio= new Portfolio("Portfolio 01");

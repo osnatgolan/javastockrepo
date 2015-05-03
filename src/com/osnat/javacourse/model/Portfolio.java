@@ -40,27 +40,26 @@ public class Portfolio {
 	public void setPortfolioSize(int portfolioSize) {
 		this.portfolioSize = portfolioSize;
 	}
-
+	
 
 	//Constructor
 	public Portfolio(String title){
 		
+		
 		this.stocks= new Stock[MAX_PORTFOLIO_SIZE];
 		this.title= title;
 		this.portfolioSize=0;
-		
 	}
 	
 	
 	//Copy constructor
 	public Portfolio(Portfolio portfolio){
-		
-		setTitle(portfolio.getTitle());
+	
+		this(portfolio.getTitle());
 		setPortfolioSize(portfolio.getPortfolioSize());
 		
-		for(int i=0; i<this.portfolioSize; i++){
-			stocks[i]= new Stock(portfolio.getStock()[i]);
-			
+		for(int i=0; i<portfolio.getPortfolioSize(); i++){
+			stocks[i]= new Stock(portfolio.getStock()[i]);			
 		}
 		
 	}
@@ -69,7 +68,7 @@ public class Portfolio {
 	
 	public void addStock(Stock stk){
 			
-		if(this.portfolioSize<MAX_PORTFOLIO_SIZE)
+		if(this.portfolioSize<MAX_PORTFOLIO_SIZE && stk != null )
 		{
 			this.stocks[this.portfolioSize]=stk;
 			this.portfolioSize++;	
@@ -95,6 +94,7 @@ public class Portfolio {
 		return str;
 	}
 	
+	//Removes Stock from portfolio
 	public void removeStock(Stock stock)
 		{
 			for(int i=0; i < portfolioSize; i++)
@@ -102,10 +102,9 @@ public class Portfolio {
 				if(this.stocks[i].getSymbol().equals(stock.getSymbol()))
 				{
 					if(i != portfolioSize-1 && portfolioSize > 1)
-						for(int j = i; j < portfolioSize-1; j++)
-						{
-							this.stocks[j] = new Stock(this.stocks[j+1]);
-						}
+						
+							this.stocks[i] = new Stock(this.stocks[portfolioSize-1]);
+						
 				}
 			}
 			this.portfolioSize--;
