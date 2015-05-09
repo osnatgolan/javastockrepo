@@ -23,28 +23,35 @@ public class PortfolioManager {
 	
 	public Portfolio getPortfolio(){
 		
-		Portfolio myportfolio= new Portfolio("Portfolio 01");
+		 Portfolio myPortfolio = new Portfolio("Exercise 7 portfolio");
+		 myPortfolio.setBalance(10000);
+
 		
+
 		Calendar c= Calendar.getInstance();
-		c.set(2014, 10, 15);
+		c.set(2014, 11, 15);
 		
 		
 		Date date1 = c.getTime();
-		Stock stock1= new Stock("PIH",(float) 13.1,(float) 12.4,date1 );
+		Stock stock1= new Stock("PIH",(float) 10.0,(float) 8.5,date1 );
 		
 		Date date2 = c.getTime();
-		Stock stock2= new Stock("AAL",(float) 5.78, (float) 5.5, date2);
+		Stock stock2= new Stock("AAL",(float) 30.0, (float) 25.5, date2);
 		
 		Date date3 = c.getTime();
-		Stock stock3= new Stock("CAAS",(float) 32.2, (float) 31.5, date3);
+		Stock stock3= new Stock("CAAS",(float) 20.0, (float) 15.5, date3);
 			
 		
-	myportfolio.addStock(stock1);
-	myportfolio.addStock(stock2);
-	myportfolio.addStock(stock3);
+	myPortfolio.buyStock(stock1,20);
+	myPortfolio.buyStock(stock1,30);
+	myPortfolio.buyStock(stock1,40);
+	
+	myPortfolio.sellStock("AAL", -1);
+	
+	myPortfolio.removeStock("CAAS");
 
 		
-		return myportfolio;
+		return myPortfolio;
 	}
 	
 	

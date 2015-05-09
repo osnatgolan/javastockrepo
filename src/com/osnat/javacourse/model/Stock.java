@@ -7,17 +7,18 @@ import java.text.SimpleDateFormat;
 
 public class Stock {
 	
+	public enum ALGO_RECOMMENDATION{
+		BUY, SELL, REMOVE, HOLD
+	}
+
+	
 	private String symbol;
 	private float ask;
 	private float bid;
 	private Date date;
 	
-	private int recomendation=0;
+	private ALGO_RECOMMENDATION recomendation;
 	private int stockQuantity=0;
-	private final static int BUY= 0;
-	private final static int SELL= 1;
-	private final static int REMOVE= 2;
-	private final static int HOLD= 3;
 	
 	
 	DateFormat df= new SimpleDateFormat("dd/MM/yyyy");
@@ -49,10 +50,11 @@ public class Stock {
 	}
 	
 	
-	public int getRecomendation() {
+
+	public ALGO_RECOMMENDATION getRecomendation() {
 		return recomendation;
 	}
-	public void setRecomendation(int recomendation) {
+	public void setRecomendation(ALGO_RECOMMENDATION recomendation) {
 		this.recomendation = recomendation;
 	}
 	public int getStockQuantity() {
@@ -69,6 +71,8 @@ public class Stock {
 				this.setBid( bid);
 				this.setAsk(ask);
 				this.setDate(date);
+				this.stockQuantity=0;
+				this.recomendation=ALGO_RECOMMENDATION.HOLD;
 				
 			}
 	
