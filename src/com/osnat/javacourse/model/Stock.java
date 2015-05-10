@@ -83,11 +83,13 @@ public class Stock {
 		this.setBid(stock. getBid());
 		this.setAsk(stock.getAsk());
 		this.setDate(stock.getDate());
+		this.setStockQuantity(stock.getStockQuantity());
+		this.setRecomendation(stock.getRecomendation());
 	}
 	
 	//printing stocks
 	public String getHtmlDescription(){
-		 String StockDeatails= new String ("<b>Stock symbol  </b>:"+this.getSymbol()+ "<b>  Bid: </b> "+this.getBid()+"<b>  Ask: </b> "+this.getAsk()+"<b>  Date: </b> "+ df.format(this.getDate())+"<br>");
+		 String StockDeatails= new String ("<br>"+"<b>Stock symbol  </b>:"+this.getSymbol()+ "<b>  Bid: </b> "+this.getBid()+"<b>  Ask: </b> "+this.getAsk()+"<b>  Date: </b> "+ df.format(this.getDate())+"<b>  Quantity: </b> "+ this.getStockQuantity()+"<br>");
 		 return StockDeatails;
 	}
 	

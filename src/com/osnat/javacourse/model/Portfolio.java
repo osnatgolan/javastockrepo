@@ -95,7 +95,7 @@ public class Portfolio {
 	
 	public void addStock(Stock stk){
 		
-		if(portfolioSize== MAX_PORTFOLIO_SIZE){
+		if(this.portfolioSize== MAX_PORTFOLIO_SIZE){
 			System.out.println("“Can’t add new stock, portfolio can have only "+ MAX_PORTFOLIO_SIZE+ " stocks”");
 			 return;
 		}
@@ -115,9 +115,10 @@ public class Portfolio {
 			}
 			
 			this.stocks[this.portfolioSize]=stk;
-			this.portfolioSize++;	
+			stocks[this.portfolioSize].setStockQuantity(0);
+			this.portfolioSize++;
 			return;
-			//this.stocks[this.portfolioSize].setStockQuantity(0);
+			
 		}
 	}
 	
@@ -129,16 +130,15 @@ public class Portfolio {
 	
 	public String getHtmlString(Portfolio portfolio){
 		
-		String str= new String("<h>"+ this.title +"<h>"+ "<br/>");
+		String str= new String("<br>"+"<h>"+ this.title +"<h>"+ "<br/>");
 		
 		for(int i=0; i<this.portfolioSize; i++){
 			str=str+ this.stocks[i].getHtmlDescription();
 		}
 		
-		String totals= new String("<br>"+ "Total Portfolio Value: "+ this.getTotalValue()+"$,"+" Total Stocks value: "+ this.getStocksValue()+
-				"$, "+" Balance: "+ this.getBalance()+"$."+"<br>");
+		str+= "<br>"+"<h>"+"Total Portfolio Value :"+"<h>"+this.getTotalValue()+ "$.<br>"+"<h>"+"Total Stocks Value :"+"<h>"+this.getStocksValue()+"$. <br>"+"<h>"+"Balance :"+"<h>"+this.balance+"$.";
 		
-		return str+ totals;
+		return str;
 	}
 	
 
@@ -220,7 +220,7 @@ public class Portfolio {
 	
 	public boolean buyStock(Stock stock, int quantity){
 		
-		int howManyToBuy;
+		int howManyToBuy=0;
 
 		if(stock==null || quantity <-1)
 		{
@@ -240,8 +240,8 @@ public class Portfolio {
 				
 				if(quantity==-1){
 					 howManyToBuy= (int)this.balance/ (int)this.stocks[i].getAsk();
-					 this.balance-= howManyToBuy * this.stocks[i].getAsk();
-					 //this.updateBalance(-(howManyToBuy * this.stocks[i].getAsk()));
+					 //this.balance-= howManyToBuy * this.stocks[i].getAsk();
+					 this.updateBalance(-(howManyToBuy * this.stocks[i].getAsk()));
 					 this.stocks[i].setRecomendation(ALGO_RECOMMENDATION.BUY);
 					 this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity() + howManyToBuy);
 					 System.out.println("You bought the whole holdings for stock "+stock.getSymbol()+" seccsesfully! "+"<br>");
@@ -256,14 +256,13 @@ public class Portfolio {
 					this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity() + quantity);
 					 System.out.println("You bought the requested holding for stock "+stock.getSymbol()+" seccsesfully! "+"<br>");
 					 return true;
-					
 				}
 			}
 		}
 		
-		this.addStock(stock);
-		this.balance-=this.stocks[this.portfolioSize-1].getAsk()*quantity;
-		//this.updateBalance(-(this.stocks[this.portfolioSize-1].getAsk()*quantity));
+		addStock(stock);
+		//this.balance-=this.stocks[this.portfolioSize-1].getAsk()*quantity;
+		this.updateBalance(- (float)(this.stocks[this.portfolioSize-1].getAsk()*quantity));
 		this.stocks[this.portfolioSize-1].setStockQuantity( quantity);
 		System.out.println("The requested  stock "+stock.getSymbol()+" was added to the Portfolio seccsesfully! "+"<br>");
 		 return true;

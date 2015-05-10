@@ -23,7 +23,7 @@ public class PortfolioManager {
 	
 	public Portfolio getPortfolio(){
 		
-		 Portfolio myPortfolio = new Portfolio("Exercise 7 portfolio");
+		 Portfolio myPortfolio = new Portfolio("<h>"+"Exercise 7 portfolio"+"<h>");
 		 myPortfolio.setBalance(10000);
 
 		
@@ -43,8 +43,8 @@ public class PortfolioManager {
 			
 		
 	myPortfolio.buyStock(stock1,20);
-	myPortfolio.buyStock(stock1,30);
-	myPortfolio.buyStock(stock1,40);
+	myPortfolio.buyStock(stock2,30);
+	myPortfolio.buyStock(stock3,40);
 	
 	myPortfolio.sellStock("AAL", -1);
 	
