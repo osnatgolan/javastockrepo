@@ -296,17 +296,17 @@ public class Portfolio implements PortfolioInterface{
 		return this.getStocksValue() + this.getBalance();
 	}
 	
-	//this function find a place of stock in array, returns -1 if stock not exist in array
-	public int findStock(String stockSymbol){
+	//this function finds stock in the array, returns NULL in case the stock does not exist
+	public StockInterface findStock(String stockSymbol){
 		
 		for(int i=0; i<this.portfolioSize; i++)
 		{
 			if(stocks[i].getSymbol().equals(stockSymbol)){
-				return i;
+				return stocks[i];
 			}
 		}
 		
-		return -1;
+		return null;
 		
 	}
 	
