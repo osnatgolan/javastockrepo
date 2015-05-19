@@ -4,8 +4,10 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.algo.model.StockInterface;
 
-public class Stock {
+
+public class Stock implements StockInterface{
 	
 	public enum ALGO_RECOMMENDATION{
 		BUY, SELL, REMOVE, HOLD

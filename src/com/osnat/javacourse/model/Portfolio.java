@@ -2,14 +2,17 @@ package com.osnat.javacourse.model;
 
 import java.util.Date;
 
+import org.algo.model.PortfolioInterface;
+import org.algo.model.StockInterface;
+
 import com.osnat.*;
 import com.osnat.javacourse.model.Stock.ALGO_RECOMMENDATION;
 
-public class Portfolio {
+public class Portfolio implements PortfolioInterface{
 	
 	String title;
 	private final static int MAX_PORTFOLIO_SIZE=5;
-	private Stock[] stocks;
+	private StockInterface[] stocks;
     int portfolioSize=0;
     
     private float balance;
@@ -37,14 +40,15 @@ public class Portfolio {
 	}
 
 
-	public Stock[] getStocks() {
+	public StockInterface[] getStocks() {
 		return stocks;
 	}
 
 
-	public void setStocks(Stock[] stocks) {
+	public void setStocks(StockInterface[] stocks) {
 		this.stocks = stocks;
 	}
+	
 
 
 	public int getPortfolioSize() {
@@ -56,6 +60,11 @@ public class Portfolio {
 		this.portfolioSize = portfolioSize;
 	}
 	
+
+	public static int getMaxPortfolioSize() {
+		return MAX_PORTFOLIO_SIZE;
+	}
+
 
 	//Constructor
 	public Portfolio(String title){
@@ -124,7 +133,7 @@ public class Portfolio {
 	
 	
 
-	public Stock[] getStock(){
+	public StockInterface[] getStock(){
 		return this.stocks;
 	}
 	
@@ -285,6 +294,20 @@ public class Portfolio {
 	public float getTotalValue(){
 		
 		return this.getStocksValue() + this.getBalance();
+	}
+	
+	//this function find a place of stock in array, returns -1 if stock not exist in array
+	public int findStock(String stockSymbol){
+		
+		for(int i=0; i<this.portfolioSize; i++)
+		{
+			if(stocks[i].getSymbol().equals(stockSymbol)){
+				return i;
+			}
+		}
+		
+		return -1;
+		
 	}
 	
 }
