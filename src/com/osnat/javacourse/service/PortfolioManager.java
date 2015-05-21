@@ -1,12 +1,17 @@
 package com.osnat.javacourse.service;
 
-import javax.servlet.http.HttpServlet;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.osnat.javacourse.model.Portfolio;
+import com.osnat.javacourse.model.Stock;
+import com.osnat.javacourse.model.Stock.ALGO_RECOMMENDATION;
+import com.osnat.*;
 
 import org.algo.dto.PortfolioDto;
 import org.algo.dto.PortfolioTotalStatus;
@@ -20,21 +25,16 @@ import org.algo.service.MarketService;
 import org.algo.service.PortfolioManagerInterface;
 import org.algo.service.ServiceManager;
 
-import com.osnat.javacourse.model.Portfolio;
-import com.osnat.javacourse.model.Stock;
-import com.osnat.*;
+/**
+ * Class code to demonstrate new PortfolioManager
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class PortfolioManager implements PortfolioManagerInterface {
 
-public class PortfolioManager implements PortfolioManagerInterface{
+	public enum OPERATION {BUY, SELL, REMOVE, HOLD }
 	
-	
+
+
 	private DatastoreService datastoreService = ServiceManager.datastoreService();
 
 	public PortfolioInterface getPortfolio() {
@@ -42,7 +42,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		return fromDto(portfolioDto);
 	}
 
-	/*
+	/**
 	 * Update portfolio with stocks
 	 */
 	@Override
@@ -73,7 +73,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		}
 	}
 
-	/*
+	/**
 	 * get portfolio totals
 	 */
 	@Override
@@ -126,7 +126,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		return ret;
 	}
 
-	/*
+	/**
 	 * Add stock to portfolio 
 	 */
 	@Override
@@ -153,7 +153,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		}
 	}
 
-	/*
+	/**
 	 * Buy stock
 	 */
 	@Override
@@ -173,7 +173,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		}
 	}
 
-	/*
+	/**
 	 * update database with new portfolio's data
 	 * @param portfolio
 	 */
@@ -192,9 +192,9 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		newStock.setSymbol(stockDto.getSymbol());
 		newStock.setAsk(stockDto.getAsk());
 		newStock.setBid(stockDto.getBid());
-		newStock.setDate(stockDto.getDate().getTime());
+		newStock.setDate(stockDto.getDate()/*.getTime()*/);
 		newStock.setStockQuantity(stockDto.getQuantity());
-		if(stockDto.getRecommendation() != null) newStock.setRecommendation(ALGO_RECOMMENDATION.valueOf(stockDto.getRecommendation()));
+		if(stockDto.getRecommendation() != null) newStock.setRecomendation(ALGO_RECOMMENDATION.valueOf(stockDto.getRecommendation()));//)valueOf(stockDto.getRecommendation()));
 
 		return newStock;
 	}
@@ -211,10 +211,10 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		
 		Stock stock = (Stock) inStock;
 		return new StockDto(stock.getSymbol(), stock.getAsk(), stock.getBid(), 
-				stock.getDate(), stock.getStockQuantity(), stock.getRecommendation().name());
+				stock.getDate(), stock.getStockQuantity(), stock.getRecomendation().name());
 	}
 
-	/*
+	/**
 	 * toDto - converts Portfolio to Portfolio DTO
 	 * @param portfolio
 	 * @return
@@ -231,7 +231,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		return new PortfolioDto(portfolio.getTitle(), portfolio.getBalance(), array);
 	}
 
-	/*
+	/**
 	 * fromDto - converts portfolioDto to Portfolio
 	 * @param dto
 	 * @return portfolio
@@ -260,7 +260,7 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		return ret;
 	}	
 
-	/*
+	/**
 	 * toDtoList - convert List of Stocks to list of Stock DTO
 	 * @param stocks
 	 * @return stockDto
@@ -276,6 +276,54 @@ public class PortfolioManager implements PortfolioManagerInterface{
 		return ret;
 	}	
 	
+	
+	/**
+	 * A method that returns a new instance of Portfolio copied from another instance.
+	 * @param portfolio		Portfolio to copy.
+	 * @return a new Portfolio object with the same values as the one given.
+	 */
+	public Portfolio duplicatePortfolio(Portfolio portfolio) {
+		Portfolio copyPortfolio = new Portfolio(portfolio);
+		return copyPortfolio;
+	}
+
+	/**
+	 * Set portfolio title
+	 */
+	@Override
+	public void setTitle(String title) {
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.setTitle(title);
+		flush(portfolio);
+	}
+	/**
+	 * Sell stock
+	 */
+	@Override
+	public void sellStock(String symbol, int quantity) throws PortfolioException {
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.sellStock(symbol, quantity);
+		flush(portfolio);
+	}
+
+	/**
+	 * Remove stock
+	 */
+	@Override
+	public void removeStock(String symbol) { 
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.removeStock(symbol);
+		flush(portfolio);
+	}
+
+	/**
+	 * update portfolio balance
+	 */
+	public void updateBalance(float value) { 
+		Portfolio portfolio = (Portfolio) getPortfolio();
+		portfolio.updateBalance(value);
+		flush(portfolio);
+	}
+
+
 }
-
-

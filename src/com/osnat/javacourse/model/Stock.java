@@ -23,6 +23,8 @@ public class Stock implements StockInterface{
 	private int stockQuantity=0;
 	
 	
+	
+	
 	DateFormat df= new SimpleDateFormat("dd/MM/yyyy");
 	
 	
@@ -66,9 +68,14 @@ public class Stock implements StockInterface{
 		this.stockQuantity = stockQuantity;
 	}
 	
+	public Stock(){
+		Stock myStock=new Stock();
+	}
+	
 	
 	//Constructor
 	public Stock(String symbol, float ask, float bid, Date date) {
+		this();
 				this.setSymbol(symbol);
 				this.setBid( bid);
 				this.setAsk(ask);
