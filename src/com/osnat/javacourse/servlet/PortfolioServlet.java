@@ -22,7 +22,7 @@ public class PortfolioServlet extends HttpServlet {
 			Portfolio portfolio = portfolioManager.getPortfolio();
 				
 			resp.setContentType("text/html");
-			resp.getWriter().println(portfolio.getHtmlString(portfolio));
+			resp.getWriter().println(portfolio.getHtmlString());
 
 			
 	}

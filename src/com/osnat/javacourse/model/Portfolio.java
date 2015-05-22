@@ -139,7 +139,7 @@ public class Portfolio implements PortfolioInterface{
 			}
 			
 			this.stocks[this.portfolioSize]=stk;
-			stocks[this.portfolioSize].setStockQuantity(0);
+			((Stock)stocks[this.portfolioSize]).setStockQuantity(0);
 			this.portfolioSize++;
 			return;
 			
@@ -152,12 +152,12 @@ public class Portfolio implements PortfolioInterface{
 		return this.stocks;
 	}
 	
-	public String getHtmlString(Portfolio portfolio){
+	public String getHtmlString(/*Portfolio portfolio*/){
 		
 		String str= new String("<br>"+"<h>"+ this.title +"<h>"+ "<br/>");
 		
 		for(int i=0; i<this.portfolioSize; i++){
-			str=str+ this.stocks[i].getHtmlDescription();
+			str=str+ ((Stock)this.stocks[i]).getHtmlDescription();
 		}
 		
 		str+= "<br>"+"<h>"+"Total Portfolio Value :"+"<h>"+this.getTotalValue()+ "$.<br>"+"<h>"+"Total Stocks Value :"+"<h>"+this.getStocksValue()+"$. <br>"+"<h>"+"Balance :"+"<h>"+this.balance+"$.";
@@ -212,23 +212,23 @@ public class Portfolio implements PortfolioInterface{
 			
 			if(this.stocks[i].getSymbol().equals(symbol)== true){
 				
-				if(this.stocks[i].getStockQuantity()-quantity <0 ){
+				if(((Stock)this.stocks[i]).getStockQuantity()-quantity <0 ){
 					System.out.println("Not enough stocks to sell!!”"+"<br>");
 					return false;
 				}
 				
 				else if (quantity==-1){
-					this.balance+= this.stocks[i].getStockQuantity() * this.stocks[i].getBid();
-					this.stocks[i].setStockQuantity(0);
-					this.stocks[i].setRecomendation(ALGO_RECOMMENDATION.SELL);
+					this.balance+= ((Stock)this.stocks[i]).getStockQuantity() * ((Stock)this.stocks[i]).getBid();
+					((Stock)this.stocks[i]).setStockQuantity(0);
+					((Stock)this.stocks[i]).setRecomendation(ALGO_RECOMMENDATION.SELL);
 					System.out.println("The whole stock "+ symbol +" holdings was sold succefully"+"<br>");
 				    return  true;
 				}
 				
 				else{
 					this.balance+= quantity * this.stocks[i].getBid();
-					this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity()-quantity);
-					this.stocks[i].setRecomendation(ALGO_RECOMMENDATION.SELL);
+					((Stock)this.stocks[i]).setStockQuantity(((Stock)this.stocks[i]).getStockQuantity()-quantity);
+					((Stock)this.stocks[i]).setRecomendation(ALGO_RECOMMENDATION.SELL);
 					System.out.println("Stock "+ symbol +" "+quantity+" holdings was sold succefully"+"<br>");
 				    return  true;
 				}
@@ -266,8 +266,8 @@ public class Portfolio implements PortfolioInterface{
 					 howManyToBuy= (int)this.balance/ (int)this.stocks[i].getAsk();
 					 //this.balance-= howManyToBuy * this.stocks[i].getAsk();
 					 this.updateBalance(-(howManyToBuy * this.stocks[i].getAsk()));
-					 this.stocks[i].setRecomendation(ALGO_RECOMMENDATION.BUY);
-					 this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity() + howManyToBuy);
+					 ((Stock)this.stocks[i]).setRecomendation(ALGO_RECOMMENDATION.BUY);
+					 ((Stock)this.stocks[i]).setStockQuantity(((Stock)this.stocks[i]).getStockQuantity() + howManyToBuy);
 					 System.out.println("You bought the whole holdings for stock "+stock.getSymbol()+" seccsesfully! "+"<br>");
 					 return true;
 				}
@@ -276,8 +276,8 @@ public class Portfolio implements PortfolioInterface{
 				{
 					this.balance-= quantity * this.stocks[i].getAsk();
 					//this.updateBalance(-(quantity * this.stocks[i].getAsk()));
-					this.stocks[i].setRecomendation(ALGO_RECOMMENDATION.BUY);
-					this.stocks[i].setStockQuantity(this.stocks[i].getStockQuantity() + quantity);
+					((Stock)this.stocks[i]).setRecomendation(ALGO_RECOMMENDATION.BUY);
+					((Stock)this.stocks[i]).setStockQuantity(((Stock)this.stocks[i]).getStockQuantity() + quantity);
 					 System.out.println("You bought the requested holding for stock "+stock.getSymbol()+" seccsesfully! "+"<br>");
 					 return true;
 				}
@@ -287,7 +287,7 @@ public class Portfolio implements PortfolioInterface{
 		addStock(stock);
 		//this.balance-=this.stocks[this.portfolioSize-1].getAsk()*quantity;
 		this.updateBalance(- (float)(this.stocks[this.portfolioSize-1].getAsk()*quantity));
-		this.stocks[this.portfolioSize-1].setStockQuantity( quantity);
+		((Stock)this.stocks[this.portfolioSize-1]).setStockQuantity( quantity);
 		System.out.println("The requested  stock "+stock.getSymbol()+" was added to the Portfolio seccsesfully! "+"<br>");
 		 return true;
 		
@@ -300,7 +300,7 @@ public class Portfolio implements PortfolioInterface{
 		
 		for (int i=0; i<this.portfolioSize; i++){
 			
-			total += this.stocks[i].getBid() * this.stocks[i].getStockQuantity() ;
+			total += this.stocks[i].getBid() * ((Stock)this.stocks[i]).getStockQuantity() ;
 		}
 		return total;
 	}

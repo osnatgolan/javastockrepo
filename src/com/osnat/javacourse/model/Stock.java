@@ -96,6 +96,19 @@ public class Stock implements StockInterface{
 		this.setRecomendation(stock.getRecomendation());
 	}
 	
+	//Copy Constructor Stock interface
+	public Stock(StockInterface stockInterface){
+		
+		this();
+		this.setSymbol(stockInterface.getSymbol());
+		this.setBid(stockInterface. getBid());
+		this.setAsk(stockInterface.getAsk());
+		this.setDate(stockInterface.getDate());
+		this.setStockQuantity(((Stock)stockInterface).getStockQuantity());
+		this.setRecomendation(((Stock)stockInterface).getRecomendation());
+	}
+	
+
 	//printing stocks
 	public String getHtmlDescription(){
 		 String StockDeatails= new String ("<br>"+"<b>Stock symbol  </b>:"+this.getSymbol()+ "<b>  Bid: </b> "+this.getBid()+"<b>  Ask: </b> "+this.getAsk()+"<b>  Date: </b> "+ df.format(this.getDate())+"<b>  Quantity: </b> "+ this.getStockQuantity()+"<br>");
