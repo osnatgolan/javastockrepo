@@ -31,7 +31,7 @@ import org.algo.service.ServiceManager;
 
 public class PortfolioManager implements PortfolioManagerInterface {
 
-	public enum OPERATION {BUY, SELL, REMOVE, HOLD }
+	public enum ALGO_RECOMMENDATION /*OPERATION*/ {BUY, SELL, REMOVE, HOLD }
 	
 
 
@@ -194,7 +194,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 		newStock.setBid(stockDto.getBid());
 		newStock.setDate(stockDto.getDate()/*.getTime()*/);
 		newStock.setStockQuantity(stockDto.getQuantity());
-		if(stockDto.getRecommendation() != null) newStock.setRecomendation(ALGO_RECOMMENDATION.valueOf(stockDto.getRecommendation()));//)valueOf(stockDto.getRecommendation()));
+		if(stockDto.getRecommendation() != null) newStock.setRecomendation(com.osnat.javacourse.model.Stock.ALGO_RECOMMENDATION.valueOf(stockDto.getRecommendation()));//)valueOf(stockDto.getRecommendation()));
 
 		return newStock;
 	}

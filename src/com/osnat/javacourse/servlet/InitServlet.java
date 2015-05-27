@@ -17,7 +17,7 @@ public class InitServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		super.init();
+		//super.init();
 		PortfolioManager pm = new PortfolioManager();
 		ServiceManager.setPortfolioManager(pm);
 	}

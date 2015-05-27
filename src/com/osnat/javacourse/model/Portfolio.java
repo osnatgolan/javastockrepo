@@ -45,6 +45,10 @@ public class Portfolio implements PortfolioInterface{
 	}
 
 
+	/*public void setStocks(StockInterface[] stocks) {
+		this.stocks = stocks;
+	}*/
+	
 	public void setStocks(StockInterface[] stocks) {
 		this.stocks = stocks;
 	}
@@ -68,46 +72,55 @@ public class Portfolio implements PortfolioInterface{
 //empty constructor
 	public Portfolio (){
 		//Portfolio myportfolio= new Portfolio();
-		this.stocks = new Stock [MAX_PORTFOLIO_SIZE];
-		this.portfolioSize = 0;
- 		this.balance = 0;
+		stocks = new Stock [MAX_PORTFOLIO_SIZE];
+		/*this.portfolioSize = 0;
+ 		this.balance = 0;*/
  	}
 	
 //constructor that gets stockaray
 	
 	public Portfolio(Stock[] stockArray){
+		// TODO Auto-generated constructor stub
 		this();
-		Portfolio myportfolio= new Portfolio();
-		this.stocks= new Stock[MAX_PORTFOLIO_SIZE];
-		for(int i=0; i<MAX_PORTFOLIO_SIZE; i++){
-			this.stocks[i]=stockArray[i];
+		this.title= new String();
+		this.portfolioSize=getPortfolioSize();
+		//Portfolio myportfolio= new Portfolio();
+		this.balance=0;
+		this.stocks= stockArray;
+	/*	for(int i=0; i<MAX_PORTFOLIO_SIZE; i++){
+			this.stocks[i]=stockArray[i];*/
+	}
+		
+
+	//Copy constructor
+	public Portfolio(Portfolio portfolio){
+	
+		this.setTitle(portfolio.getTitle());
+		setPortfolioSize(portfolio.getPortfolioSize());
+		setBalance(portfolio.getBalance());
+		
+		this.setStocks(portfolio.stocks);
+		
+		for(int i=0; i<portfolio.getPortfolioSize(); i++){
+			//stocks[i]= new Stock(portfolio.getStock()[i]);	
+			Stock tmp = new Stock(((Stock)portfolio.stocks[i]));
+			this.addStock(tmp);
 		}
 		
 	}
 	
 	//Constructor
-	public Portfolio(String title){
+/*	public Portfolio(String title){
 		
 		this();
 		this.stocks= new Stock[MAX_PORTFOLIO_SIZE];
 		this.title= title;
 		this.portfolioSize=0;
 		this.balance=0;
-	}
+	}*/
 	
 	
-	//Copy constructor
-	public Portfolio(Portfolio portfolio){
-	
-		this(portfolio.getTitle());
-		setPortfolioSize(portfolio.getPortfolioSize());
-		setBalance(portfolio.getBalance());
-		
-		for(int i=0; i<portfolio.getPortfolioSize(); i++){
-			stocks[i]= new Stock(portfolio.getStock()[i]);			
-		}
-		
-	}
+
 	
 	
 	public void updateBalance(float amount){
@@ -183,7 +196,7 @@ public class Portfolio implements PortfolioInterface{
 				
 				if(i != portfolioSize-1 && portfolioSize > 1){
 					
-					this.stocks[i] = new Stock(this.stocks[portfolioSize-1]);
+					this.stocks[i] = new Stock(((Stock)this.stocks[portfolioSize-1]));
 				}
 					
 			res=true;
@@ -320,8 +333,8 @@ public class Portfolio implements PortfolioInterface{
 		
 		for(int i=0; i<this.portfolioSize; i++)
 		{
-			if(stocks[i].getSymbol().equals(stockSymbol)){
-				return stocks[i];
+			if(getStocks()[i].getSymbol().equals(stockSymbol)){
+				return this.getStocks()[i];
 			}
 		}
 		

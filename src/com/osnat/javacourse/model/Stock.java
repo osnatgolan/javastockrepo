@@ -80,7 +80,7 @@ public class Stock implements StockInterface{
 	
 	//Constructor
 	public Stock(String symbol, float ask, float bid, Date date) {
-		this();
+		//this();
 				this.setSymbol(symbol);
 				this.setBid( bid);
 				this.setAsk(ask);
@@ -101,7 +101,7 @@ public class Stock implements StockInterface{
 		this.setRecomendation(stock.getRecomendation());
 	}
 	
-	//Copy Constructor Stock interface
+	/*//Copy Constructor Stock interface
 	public Stock(StockInterface stockInterface){
 		
 		this();
@@ -111,7 +111,7 @@ public class Stock implements StockInterface{
 		this.setDate(stockInterface.getDate());
 		this.setStockQuantity(((Stock)stockInterface).getStockQuantity());
 		this.setRecomendation(((Stock)stockInterface).getRecomendation());
-	}
+	}*/
 	
 
 	//printing stocks
