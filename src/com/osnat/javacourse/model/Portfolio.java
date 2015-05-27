@@ -67,13 +67,17 @@ public class Portfolio implements PortfolioInterface{
 
 //empty constructor
 	public Portfolio (){
-		Portfolio myportfolio= new Portfolio();
-	}
+		//Portfolio myportfolio= new Portfolio();
+		this.stocks = new Stock [MAX_PORTFOLIO_SIZE];
+		this.portfolioSize = 0;
+ 		this.balance = 0;
+ 	}
 	
 //constructor that gets stockaray
 	
 	public Portfolio(Stock[] stockArray){
 		this();
+		Portfolio myportfolio= new Portfolio();
 		this.stocks= new Stock[MAX_PORTFOLIO_SIZE];
 		for(int i=0; i<MAX_PORTFOLIO_SIZE; i++){
 			this.stocks[i]=stockArray[i];

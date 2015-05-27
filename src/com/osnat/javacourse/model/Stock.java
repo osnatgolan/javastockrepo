@@ -69,7 +69,12 @@ public class Stock implements StockInterface{
 	}
 	
 	public Stock(){
-		Stock myStock=new Stock();
+		this.symbol=new String();
+		this.ask=0;
+		this.bid=0;
+		this.date= new Date();
+		this.recomendation= ALGO_RECOMMENDATION.HOLD;
+		this.stockQuantity=0;
 	}
 	
 	
