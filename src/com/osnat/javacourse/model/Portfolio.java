@@ -71,10 +71,8 @@ public class Portfolio implements PortfolioInterface{
 
 //empty constructor
 	public Portfolio (){
-		//Portfolio myportfolio= new Portfolio();
 		stocks = new Stock [MAX_PORTFOLIO_SIZE];
-		/*this.portfolioSize = 0;
- 		this.balance = 0;*/
+
  	}
 	
 //constructor that gets stockaray
@@ -83,12 +81,12 @@ public class Portfolio implements PortfolioInterface{
 		// TODO Auto-generated constructor stub
 		this();
 		this.title= new String();
-		this.portfolioSize=getPortfolioSize();
-		//Portfolio myportfolio= new Portfolio();
+		this.portfolioSize=stockArray.length;
+		this.stocks = new StockInterface[MAX_PORTFOLIO_SIZE];
 		this.balance=0;
-		this.stocks= stockArray;
-	/*	for(int i=0; i<MAX_PORTFOLIO_SIZE; i++){
-			this.stocks[i]=stockArray[i];*/
+		for(int i = 0; i<this.portfolioSize; i++){
+ 			this.stocks[i]= new Stock ((Stock)stockArray[i]);
+		}
 	}
 		
 
