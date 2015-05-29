@@ -12,7 +12,7 @@ import org.algo.service.ServiceManager;
 import com.osnat.javacourse.service.PortfolioManager;
 
 @SuppressWarnings("serial")
-public class InitServlet extends HttpServlet {
+public class InitServlet extends javax.servlet.http.HttpServlet {
 
 	@Override
 	public void init() throws ServletException {

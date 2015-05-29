@@ -54,11 +54,9 @@ public class Portfolio implements PortfolioInterface{
 	}
 	
 
-
 	public int getPortfolioSize() {
 		return portfolioSize;
 	}
-
 
 	public void setPortfolioSize(int portfolioSize) {
 		this.portfolioSize = portfolioSize;
@@ -192,9 +190,16 @@ public class Portfolio implements PortfolioInterface{
 			{
 				this.sellStock(this.stocks[i].getSymbol(), -1);
 				
+				//set stock reference at i to null
+				
+				//move last stock in array (if found) to i location.
+				
 				if(i != portfolioSize-1 && portfolioSize > 1){
-					
+					this.stocks[i]=null;
 					this.stocks[i] = new Stock(((Stock)this.stocks[portfolioSize-1]));
+				}
+				else{
+					this.stocks[i]=null;
 				}
 					
 			res=true;

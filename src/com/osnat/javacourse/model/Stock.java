@@ -22,11 +22,7 @@ public class Stock implements StockInterface{
 	private ALGO_RECOMMENDATION recomendation;
 	private int stockQuantity=0;
 	
-	
-	
-	
-	DateFormat df= new SimpleDateFormat("dd/MM/yyyy");
-	
+	private transient DateFormat df= new SimpleDateFormat("dd/MM/yyyy");
 	
 	public String getSymbol() {
 		return symbol;
@@ -101,17 +97,7 @@ public class Stock implements StockInterface{
 		this.setRecomendation(stock.getRecomendation());
 	}
 	
-	/*//Copy Constructor Stock interface
-	public Stock(StockInterface stockInterface){
-		
-		this();
-		this.setSymbol(stockInterface.getSymbol());
-		this.setBid(stockInterface. getBid());
-		this.setAsk(stockInterface.getAsk());
-		this.setDate(stockInterface.getDate());
-		this.setStockQuantity(((Stock)stockInterface).getStockQuantity());
-		this.setRecomendation(((Stock)stockInterface).getRecomendation());
-	}*/
+
 	
 
 	//printing stocks
