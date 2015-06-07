@@ -1,6 +1,6 @@
 package com.osnat.javacourse.service;
 
-
+import com.osnat.javacourse.exception.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.osnat.javacourse.exception.BalanceException;
 import com.osnat.javacourse.model.Portfolio;
 import com.osnat.javacourse.model.Stock;
 import com.osnat.javacourse.model.Stock.ALGO_RECOMMENDATION;
@@ -38,6 +39,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	private DatastoreService datastoreService = ServiceManager.datastoreService();
 
 	public PortfolioInterface getPortfolio() {
+	
 		PortfolioDto portfolioDto = datastoreService.getPortfolilo();
 		return fromDto(portfolioDto);
 	}
@@ -129,8 +131,9 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	/**
 	 * Add stock to portfolio 
 	 */
+	//exception added here
 	@Override
-	public void addStock(String symbol) {
+	public void addStock(String symbol)throws PortfolioException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
 
 		try {
@@ -282,7 +285,8 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	 * @param portfolio		Portfolio to copy.
 	 * @return a new Portfolio object with the same values as the one given.
 	 */
-	public Portfolio duplicatePortfolio(Portfolio portfolio) {
+	//exception added here
+	public Portfolio duplicatePortfolio(Portfolio portfolio) throws PortfolioException {
 		Portfolio copyPortfolio = new Portfolio(portfolio);
 		return copyPortfolio;
 	}
@@ -299,6 +303,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	/**
 	 * Sell stock
 	 */
+	//exception added here
 	@Override
 	public void sellStock(String symbol, int quantity) throws PortfolioException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
@@ -310,7 +315,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	 * Remove stock
 	 */
 	@Override
-	public void removeStock(String symbol) { 
+	public void removeStock(String symbol) throws PortfolioException { 
 		Portfolio portfolio = (Portfolio) getPortfolio();
 		portfolio.removeStock(symbol);
 		flush(portfolio);
@@ -319,9 +324,15 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	/**
 	 * update portfolio balance
 	 */
-	public void updateBalance(float value) { 
+	//exception added here
+	public void updateBalance(float value) throws PortfolioException { 
 		Portfolio portfolio = (Portfolio) getPortfolio();
-		portfolio.updateBalance(value);
+		try{
+			portfolio.updateBalance(value);
+		}catch(BalanceException e){
+			System.out.println(e.getMessage());
+		}
+		
 		flush(portfolio);
 	}
 
